@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "author": "LidarSafe Technologies - Real-Time Systems Prototype",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_collision",
+      "top": -80,
+      "left": 150,
+      "attrs": { "color": "red", "label": "COLLISION WARNING" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_proximity",
+      "top": -80,
+      "left": 200,
+      "attrs": { "color": "yellow", "label": "PROXIMITY ALERT" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_heartbeat",
+      "top": -80,
+      "left": 250,
+      "attrs": { "color": "green", "label": "HEARTBEAT" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic",
+      "top": 100,
+      "left": 250,
+      "attrs": { "distance": "100" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_emergency",
+      "top": -80,
+      "left": 50,
+      "attrs": { "color": "red", "label": "EMERGENCY STOP" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -40,
+      "left": 130,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -40,
+      "left": 180,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": -40,
+      "left": 230,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    ["esp:TX0", "$serialMonitor:RX", "", []],
+    ["esp:RX0", "$serialMonitor:TX", "", []],
+
+    ["led_collision:A", "r1:2", "red", []],
+    ["r1:1", "esp:2", "red", []],
+    ["led_collision:C", "esp:GND.1", "black", []],
+
+    ["led_proximity:A", "r2:2", "yellow", []],
+    ["r2:1", "esp:15", "yellow", []],
+    ["led_proximity:C", "esp:GND.1", "black", []],
+
+    ["led_heartbeat:A", "r3:2", "green", []],
+    ["r3:1", "esp:13", "green", []],
+    ["led_heartbeat:C", "esp:GND.1", "black", []],
+
+    ["ultrasonic:VCC", "esp:5V", "red", []],
+    ["ultrasonic:GND", "esp:GND.2", "black", []],
+    ["ultrasonic:TRIG", "esp:5", "orange", []],
+    ["ultrasonic:ECHO", "esp:18", "blue", []],
+
+    ["btn_emergency:1.l", "esp:4", "purple", []],
+    ["btn_emergency:2.l", "esp:GND.1", "black", []],
+
+    ["esp:19", "esp:GND.1", "gray", []]
+  ]
+}

@@ -1,0 +1,10 @@
+[wokwi]
+version = 1
+firmware = "src/main.cpp"
+elf = ""
+
+# Enable logic analyzer for timing verification
+[logic_analyzer]
+enabled = true
+# Monitor task execution pins for determinism proof
+pins = ["GPIO2", "GPIO15", "GPIO13", "GPIO19"]
